@@ -1,0 +1,92 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+Desktop.ini
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+!.env.*.example
+config.yaml
+*.local
+*.key
+*.pem
+*.crt
+*.p12
+*.pfx
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Go
+bin/
+tmp/
+*.exe
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+coverage.out
+coverage.html
+.coverprofile
+
+# Frontend: Vue / Vite / TypeScript
+node_modules/
+dist/
+dist-ssg/
+.vite/
+.vitepress/cache/
+coverage/
+*.tsbuildinfo
+auto-imports.d.ts
+components.d.ts
+
+# Package managers
+.npm/
+.pnpm-store/
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# Cloudflare / Workers
+.wrangler/
+.dev.vars
+
+# Docker / local runtime data
+docker-data/
+data/
+storage/
+attachments/
+postgres-data/
+redis-data/
+caddy-data/
+caddy-config/
+backups/
+*.dump
+*.sql.gz
+*.zip
+
+# Build / cache
+build/
+.cache/
+.parcel-cache/
+.turbo/
+.eslintcache
+
+other/

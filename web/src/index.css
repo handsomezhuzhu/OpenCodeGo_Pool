@@ -1,0 +1,171 @@
+@import "tailwindcss";
+@plugin "tailwindcss-animate";
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  /* existing flat tokens — unchanged, kept for QuotaBar + any non-migrated class */
+  --color-parchment: #f5f4ed;
+  --color-ivory: #faf9f5;
+  --color-near-black: #141413;
+  --color-terracotta: #c96442;
+  --color-coral: #d97757;
+  --color-olive: #5e5d59;
+  --color-stone: #87867f;
+  --color-charcoal: #4d4c48;
+  --color-dark-warm: #3d3d3a;
+  --color-warm-sand: #e8e6dc;
+  --color-warm-silver: #b0aea5;
+  --color-border-cream: #f0eee6;
+  --color-border-warm: #e8e6dc;
+  --color-surface-dark: #30302e;
+  --color-deep-dark: #141413;
+  --color-error-crimson: #b53333;
+  --color-focus-blue: #3898ec;
+  --color-ring-warm: #d1cfc5;
+  --color-ring-deep: #c2c0b6;
+  --color-quota-green: #5a9a6e;
+  --color-quota-amber: #c96442;
+  --color-quota-red: #b53333;
+
+  --font-serif: "LXGW WenKai Screen", Georgia, "Times New Roman", serif;
+  --font-sans: "LXGW WenKai Screen", Inter, system-ui, -apple-system, sans-serif;
+  --font-mono: "LXGW WenKai Screen", "JetBrains Mono", "Fira Code", Consolas, monospace;
+
+  --shadow-whisper: 0 4px 24px rgba(0, 0, 0, 0.05);
+  --animate-fade-in: fade-in 0.3s ease-out;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+:root {
+  --background: 52 29% 95%;
+  --foreground: 60 3% 8%;
+  --card: 45 33% 97%;
+  --card-foreground: 60 3% 8%;
+  --popover: 45 33% 97%;
+  --popover-foreground: 60 3% 8%;
+  --primary: 15 56% 52%;
+  --primary-foreground: 45 33% 97%;
+  --secondary: 45 22% 89%;
+  --secondary-foreground: 48 4% 28%;
+  --muted: 45 25% 92%;
+  --muted-foreground: 48 4% 36%;
+  --accent: 44 24% 90%;
+  --accent-foreground: 60 3% 8%;
+  --destructive: 0 56% 45%;
+  --destructive-foreground: 45 33% 97%;
+  --success: 133 22% 38%;
+  --success-foreground: 45 33% 97%;
+  --warning: 32 60% 44%;
+  --warning-foreground: 45 33% 97%;
+  --info: 208 78% 57%;
+  --info-foreground: 45 33% 97%;
+  --border: 44 20% 85%;
+  --input: 44 20% 85%;
+  --ring: 208 78% 57%;
+  --radius: 0.75rem;
+}
+
+.dark {
+  --background: 60 3% 8%;
+  --foreground: 45 18% 90%;
+  --card: 60 2% 18%;
+  --card-foreground: 45 18% 90%;
+  --popover: 60 2% 13%;
+  --popover-foreground: 45 18% 90%;
+  --primary: 16 63% 60%;
+  --primary-foreground: 60 3% 8%;
+  --secondary: 60 2% 22%;
+  --secondary-foreground: 45 18% 90%;
+  --muted: 60 2% 18%;
+  --muted-foreground: 48 7% 67%;
+  --accent: 60 2% 24%;
+  --accent-foreground: 45 18% 90%;
+  --destructive: 0 60% 55%;
+  --destructive-foreground: 45 18% 95%;
+  --success: 133 30% 55%;
+  --success-foreground: 60 3% 8%;
+  --warning: 36 65% 58%;
+  --warning-foreground: 60 3% 8%;
+  --info: 208 78% 62%;
+  --info-foreground: 60 3% 8%;
+  --border: 60 2% 24%;
+  --input: 60 2% 24%;
+  --ring: 208 78% 62%;
+}
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-success: hsl(var(--success));
+  --color-success-foreground: hsl(var(--success-foreground));
+  --color-warning: hsl(var(--warning));
+  --color-warning-foreground: hsl(var(--warning-foreground));
+  --color-info: hsl(var(--info));
+  --color-info-foreground: hsl(var(--info-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+  --shadow-ring: 0 0 0 1px hsl(var(--ring) / 0.25);
+}
+
+body {
+  margin: 0;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  h1, h2, h3, h4 {
+    @apply font-serif;
+  }
+  ::selection {
+    background-color: hsl(var(--primary) / 0.2);
+  }
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--color-focus-blue);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-focus-blue) 25%, transparent);
+}
+
+@layer utilities {
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}

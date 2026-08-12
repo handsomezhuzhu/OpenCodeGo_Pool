@@ -1,0 +1,16 @@
+server:
+  address: ":8080"
+  password: "your-password-here"
+
+database:
+  path: "./data/pool.db"
+
+scraper:
+  interval: "5m"
+  timeout: "30s"
+
+cpa:
+  endpoint: "https://cpa.example.com/v0/management/openai-compatibility"
+  bearer_token: "bearer-token-here"
+  provider_name: "OpenCode Go"
+  base_url: "https://opencode.ai/zen/go/v1"
