@@ -83,3 +83,7 @@ mkdir -p data
 | 后端 | Go · chi · SQLite（pure Go，无 CGO） |
 | 前端 | React 19 · TypeScript · Vite · TanStack Query · Tailwind CSS v4 · Radix UI · Recharts |
 | 部署 | 单二进制，前端通过 `embed.FS` 内嵌 |
+
+## 友情链接
+
+- [LinuxDo](https://linux.do)
