@@ -42,6 +42,15 @@ build.bat
 
 This script: `npm ci` → `npm run build` → copies `web/dist` to `internal/frontend/dist` → `go test ./...` → `go vet ./...` → cross-compiles to `build/opencode-pool-linux-amd64` with `CGO_ENABLED=0`.
 
+### Docker
+
+```bash
+docker build -t opencode-pool .   # multi-stage: frontend build → Go cross-compile → alpine runtime
+docker compose up -d              # runs with ./config.yaml mounted read-only, named volume for /app/data
+```
+
+`.github/workflows/docker.yml` builds and pushes multi-arch images (amd64/arm64) to GHCR on pushes to `main` and `v*` tags; PRs build only. The runtime image runs as non-root user `app` (uid 1000) with WORKDIR `/app` — the app reads `config.yaml` from there and writes SQLite to `/app/data`.
+
 ## Architecture
 
 ### Data flow

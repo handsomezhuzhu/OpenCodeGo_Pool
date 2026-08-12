@@ -83,7 +83,49 @@ cpa:
 
 ---
 
-## 部署与运行
+## Docker 部署
+
+仓库内置 GitHub Actions 工作流（`.github/workflows/docker.yml`）：推送到 `main` 分支或打 `v*` 标签时自动构建 `linux/amd64` + `linux/arm64` 镜像并推送到 GHCR；Pull Request 只验证构建不推送。
+
+镜像地址：
+
+```
+ghcr.io/handsomezhuzhu/opencodego_pool:latest      # main 分支最新
+ghcr.io/handsomezhuzhu/opencodego_pool:1.2.3       # v1.2.3 标签（语义化版本）
+```
+
+### 使用 docker compose（推荐）
+
+仓库根目录已提供 `docker-compose.yml`：
+
+```bash
+cp config.example.yaml config.yaml
+# 编辑 config.yaml
+docker compose up -d
+```
+
+- `config.yaml` 以只读方式挂载进容器，修改后执行 `docker compose restart` 生效
+- SQLite 数据库保存在命名卷 `opencode-pool-data` 中（对应容器内 `/app/data`）
+
+### 使用 docker run
+
+```bash
+docker run -d --name opencode-pool --restart unless-stopped \
+  -p 8080:8080 \
+  -v ./config.yaml:/app/config.yaml:ro \
+  -v opencode-pool-data:/app/data \
+  ghcr.io/handsomezhuzhu/opencodego_pool:latest
+```
+
+### 说明
+
+- 镜像基于 Alpine，内置前端，以非 root 用户运行，监听 `8080` 端口
+- GHCR 包默认为私有：在仓库 Packages 页面改为 Public 可匿名拉取，或在服务器上 `docker login ghcr.io`（使用带 `read:packages` 权限的 PAT）后拉取
+- 自托管镜像也可本地构建：`docker build -t opencode-pool .`
+
+---
+
+## 部署与运行（裸机 / systemd）
 
 将以下文件上传到服务器：
 

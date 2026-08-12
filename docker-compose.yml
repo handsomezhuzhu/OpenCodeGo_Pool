@@ -1,0 +1,15 @@
+services:
+  opencode-pool:
+    image: ghcr.io/handsomezhuzhu/opencodego_pool:latest
+    container_name: opencode-pool
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    volumes:
+      # 配置文件（只读挂载，修改后 docker compose restart 生效）
+      - ./config.yaml:/app/config.yaml:ro
+      # SQLite 数据持久化（命名卷，权限开箱即用）
+      - opencode-pool-data:/app/data
+
+volumes:
+  opencode-pool-data:

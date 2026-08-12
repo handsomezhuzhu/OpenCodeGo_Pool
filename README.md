@@ -26,11 +26,42 @@
 
 ## 快速开始
 
-**1. 在 CPA 中提前创建对应的 OpenAI 兼容提供商**（必须）
+**0. 在 CPA 中提前创建对应的 OpenAI 兼容提供商**（必须，两种部署方式通用）
 
 > 同步逻辑依赖提供商在 CPA 侧已存在。详见 [部署文档 → 前提条件](DEPLOY.md#1-在-cpa-中创建-openai-兼容提供商必须提前完成)。
 
-**2. 构建**
+### 方式一：Docker（推荐）
+
+推送到 `main` 分支或打 `v*` 标签时，GitHub Actions 会自动构建多架构（amd64 / arm64）镜像并推送到 GHCR：
+
+```
+ghcr.io/handsomezhuzhu/opencodego_pool:latest
+```
+
+```bash
+# 准备配置
+cp config.example.yaml config.yaml
+# 编辑 config.yaml，填写 server.password、cpa.endpoint、cpa.bearer_token
+
+# 启动（compose 方式，数据保存在命名卷中）
+docker compose up -d
+```
+
+不用 compose 也可以直接 `docker run`：
+
+```bash
+docker run -d --name opencode-pool \
+  -p 8080:8080 \
+  -v ./config.yaml:/app/config.yaml:ro \
+  -v opencode-pool-data:/app/data \
+  ghcr.io/handsomezhuzhu/opencodego_pool:latest
+```
+
+> GHCR 上的镜像默认为私有。如需匿名拉取，在仓库的 Packages 页面将该包可见性设为 Public；或在服务器上 `docker login ghcr.io` 后再拉取。
+
+### 方式二：从源码构建
+
+**1. 构建**
 
 需要 Go 1.21+ 和 Node.js 18+。前端产物会嵌入到 Go 二进制中，因此 `go build` / `go run` 前需先构建前端。
 
@@ -59,14 +90,14 @@ build.bat
 :: 产物：build/opencode-pool-linux-amd64
 ```
 
-**3. 配置**
+**2. 配置**
 
 ```bash
 cp config.example.yaml config.yaml
 # 填写 server.password、cpa.endpoint、cpa.bearer_token
 ```
 
-**4. 运行**
+**3. 运行**
 
 ```bash
 mkdir -p data
